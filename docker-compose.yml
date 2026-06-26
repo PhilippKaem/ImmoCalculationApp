@@ -1,0 +1,9 @@
+services:
+  immo-kalkulator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: immo-kalkulator
+    ports:
+      - "3000:80"
+    restart: unless-stopped
