@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   LayoutDashboard, SlidersHorizontal, BarChart3, ClipboardCheck,
-  Lightbulb, GitCompare, Building2, Save, RotateCcw, ChevronRight,
+  Lightbulb, GitCompare, Building2, Save, RotateCcw, ChevronRight, FilePlus,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { useStore } from '../lib/store';
@@ -24,7 +24,7 @@ const NAV: NavItem[] = [
 ];
 
 export function Sidebar() {
-  const { activePage, setActivePage, currentObjectName, setCurrentObjectName, saveCurrentObject, resetToDefaults } = useStore();
+  const { activePage, setActivePage, currentObjectName, setCurrentObjectName, saveCurrentObject, resetToDefaults, newObject } = useStore();
 
   const [editingName, setEditingName] = React.useState(false);
   const [nameVal, setNameVal] = React.useState(currentObjectName);
@@ -103,6 +103,13 @@ export function Sidebar() {
       {/* Actions */}
       <div className="px-3 py-4 border-t border-white/10 space-y-1.5">
         <button
+          onClick={newObject}
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-sm"
+        >
+          <FilePlus size={14} />
+          Neues Objekt
+        </button>
+        <button
           onClick={saveCurrentObject}
           className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-white/10 hover:text-white transition-all"
         >
@@ -114,7 +121,7 @@ export function Sidebar() {
           className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-white/10 hover:text-white transition-all"
         >
           <RotateCcw size={14} className="text-slate-400" />
-          Zurücksetzen
+          Demo zurücksetzen
         </button>
       </div>
 

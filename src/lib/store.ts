@@ -42,6 +42,7 @@ interface AppState {
   loadObject: (id: string) => void;
   deleteObject: (id: string) => void;
   resetToDefaults: () => void;
+  newObject: () => void;
 }
 
 function recalc(state: Omit<AppState, 'results' | 'savedObjects' | 'activePage' | 'currentObjectName' | 'currentObjectId' | keyof { setProperty: unknown; setRental: unknown; setFinancing: unknown; setTax: unknown; setAdditionalCosts: unknown; setActivePage: unknown; setCurrentObjectName: unknown; saveCurrentObject: unknown; loadObject: unknown; deleteObject: unknown; resetToDefaults: unknown }>): CalculationResults {
@@ -157,6 +158,29 @@ export const useStore = create<AppState>()(
         currentObjectName: 'ETW Chemnitz – Demo',
         currentObjectId: null,
       }),
+
+      newObject: () => {
+        const today = new Date().toISOString().slice(0, 10);
+        const year  = new Date().getFullYear();
+        const blank = calculateResults(
+          { purchasePrice: 0, livingArea: 0, rooms: 0, constructionYear: year, propertyType: 'ETW', condition: 'Gepflegt', federalState: 'NW', landValueShare: 20, energyValue: 0, heatingType: 'Gas', address: '' },
+          { monthlyRent: 0, rentIncreasePA: 2.0, vacancyRate: 3.0, mietpreisbremseActive: false },
+          { equity: 0, loanAmountOverride: 0, interestRate: 3.5, fixedRatePeriod: 15, initialRepaymentRate: 2.0, specialRepaymentPA: 0, useKfw: false, kfwProgram: '', kfwAmount: 0, kfwInterestRate: 2.5, kfwRepaymentGrant: 0 },
+          { marginalTaxRate: 42, buildingShare: 80, purchaseContractDate: today, useDegressiveAfa: false, useSpecialAfa7b: false, shorterUsefulLife: 0, holdingPeriod: 15, annualAppreciationRate: 1.5 },
+          { landTransferTaxOverride: 0, notaryFeePercent: 1.5, brokerFeePercent: 3.57, surveyorCost: 0, financingCost: 0, renovationBudget: 0, managementCostMonthly: 30, maintenanceCostPerSqm: 10, wegMonthlyContribution: 40, otherNonAllocableCosts: 200 },
+        );
+        set({
+          property:        { purchasePrice: 0, livingArea: 0, rooms: 0, constructionYear: year, propertyType: 'ETW', condition: 'Gepflegt', federalState: 'NW', landValueShare: 20, energyValue: 0, heatingType: 'Gas', address: '' },
+          rental:          { monthlyRent: 0, rentIncreasePA: 2.0, vacancyRate: 3.0, mietpreisbremseActive: false },
+          financing:       { equity: 0, loanAmountOverride: 0, interestRate: 3.5, fixedRatePeriod: 15, initialRepaymentRate: 2.0, specialRepaymentPA: 0, useKfw: false, kfwProgram: '', kfwAmount: 0, kfwInterestRate: 2.5, kfwRepaymentGrant: 0 },
+          tax:             { marginalTaxRate: 42, buildingShare: 80, purchaseContractDate: today, useDegressiveAfa: false, useSpecialAfa7b: false, shorterUsefulLife: 0, holdingPeriod: 15, annualAppreciationRate: 1.5 },
+          additionalCosts: { landTransferTaxOverride: 0, notaryFeePercent: 1.5, brokerFeePercent: 3.57, surveyorCost: 0, financingCost: 0, renovationBudget: 0, managementCostMonthly: 30, maintenanceCostPerSqm: 10, wegMonthlyContribution: 40, otherNonAllocableCosts: 200 },
+          results:         blank,
+          currentObjectName: 'Neues Objekt',
+          currentObjectId:   null,
+          activePage:        'inputs',
+        });
+      },
     }),
     {
       name: 'immo-kalkulator-v1',
