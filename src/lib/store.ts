@@ -73,7 +73,7 @@ export const useStore = create<AppState>()(
       results: initialResults,
       savedObjects: [],
       activePage: 'overview',
-      currentObjectName: 'Neues Objekt',
+      currentObjectName: 'ETW Chemnitz – Demo',
       currentObjectId: null,
 
       setProperty: (p) => set((s) => {
@@ -154,7 +154,7 @@ export const useStore = create<AppState>()(
         tax: { ...DEFAULT_TAX },
         additionalCosts: { ...DEFAULT_ADDITIONAL_COSTS },
         results: initialResults,
-        currentObjectName: 'Neues Objekt',
+        currentObjectName: 'ETW Chemnitz – Demo',
         currentObjectId: null,
       }),
     }),

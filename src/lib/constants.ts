@@ -50,32 +50,34 @@ export const SPEKULATIONSFRIST_YEARS = 10;
 
 export const LAND_TRANSFER_TAX_BAGATELL = 2500; // § 3 Nr. 1 GrEStG
 
+// ─── Demo-Objekt: ETW Chemnitz – attraktive B-Lage, positiver Cashflow ───────
+// Kaufpreisfaktor ~15x, Nettomietrendite ~4,8 %, DSCR >1,3, CF nach Steuer positiv
 export const DEFAULT_PROPERTY = {
-  purchasePrice: 220000,
-  livingArea: 68,
-  rooms: 2.5,
+  purchasePrice: 110000,
+  livingArea: 75,
+  rooms: 3,
   constructionYear: 1995,
   propertyType: 'ETW' as const,
-  condition: 'Gepflegt' as const,
-  federalState: 'NW' as const,
-  landValueShare: 20,
-  energyValue: 120,
-  heatingType: 'Gas' as const,
-  address: '',
+  condition: 'Saniert' as const,
+  federalState: 'SN' as const,   // Sachsen: 5,5 % GrESt (günstiger als NRW)
+  landValueShare: 15,             // niedriger Bodenanteil in Chemnitz
+  energyValue: 90,
+  heatingType: 'Fernwaerme' as const,
+  address: 'Musterstraße 12, 09111 Chemnitz',
 };
 
 export const DEFAULT_RENTAL = {
-  monthlyRent: 780,
+  monthlyRent: 600,              // 8 €/m² – marktüblich für Chemnitz
   rentIncreasePA: 2.0,
   vacancyRate: 2.0,
   mietpreisbremseActive: false,
 };
 
 export const DEFAULT_FINANCING = {
-  equity: 55000,
+  equity: 40000,                 // ~33 % EK → LTV ~73 %  → gute Zinskonditionen
   loanAmountOverride: 0,
-  interestRate: 3.8,
-  fixedRatePeriod: 10,
+  interestRate: 3.3,             // gute Kondition dank niedrigem LTV
+  fixedRatePeriod: 15,
   initialRepaymentRate: 2.0,
   specialRepaymentPA: 0,
   useKfw: false,
@@ -88,23 +90,23 @@ export const DEFAULT_FINANCING = {
 export const DEFAULT_TAX = {
   marginalTaxRate: 42,
   buildingShare: 80,
-  purchaseContractDate: '2024-01-01',
+  purchaseContractDate: '2024-03-01',
   useDegressiveAfa: false,
   useSpecialAfa7b: false,
   shorterUsefulLife: 0,
   holdingPeriod: 20,
-  annualAppreciationRate: 1.5,
+  annualAppreciationRate: 2.0,   // Chemnitz: Aufwertungstrend
 };
 
 export const DEFAULT_ADDITIONAL_COSTS = {
   landTransferTaxOverride: 0,
   notaryFeePercent: 1.5,
-  brokerFeePercent: 3.57,
-  surveyorCost: 0,
+  brokerFeePercent: 1.5,         // verhandelter Maklersatz (nicht 3,57 %)
+  surveyorCost: 500,             // Gutachter empfohlen
   financingCost: 0,
   renovationBudget: 0,
-  managementCostMonthly: 30,
-  maintenanceCostPerSqm: 10,
-  wegMonthlyContribution: 50,
-  otherNonAllocableCosts: 200,
+  managementCostMonthly: 25,
+  maintenanceCostPerSqm: 11,
+  wegMonthlyContribution: 40,
+  otherNonAllocableCosts: 150,
 };
